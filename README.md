@@ -1,5 +1,6 @@
 # procedural_terrain
 Minimal procedural terrain generation with 3D mesh export and visualization.
+
 <img src="notebook/output.png" width=256>
 
 ## Features
