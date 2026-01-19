@@ -1,0 +1,14 @@
+terrain:
+  width: 128         # x points
+  height: 128        # y points
+  scale: 20.0        # noise scale
+  height_scale: 8.0 # vertical exaggeration
+  octaves: 4         # FBM octaves
+  seed: 67
+
+output:
+  mesh_dir: "meshes/"
+  mesh_name: "terrain.obj"
+
+render:
+  cmap: "terrain" # colormap
