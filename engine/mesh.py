@@ -18,6 +18,15 @@ def heightmap_mesh(hm: np.ndarray, scale: float = 1.0, height_scale: float = 1.0
     faces = np.array(faces, dtype=np.int32)
     return vertices, faces
 
+def normalize(hm: np.ndarray, min_val: float = 0.0, max_val: float = 1.0) -> np.ndarray:
+    hm_min, hm_max = hm.min(), hm.max()
+
+    if hm_max - hm_min == 0:
+        return np.full_like(hm, min_val)
+    
+    norm = (hm - hm_min) / (hm_max - hm_min)
+    return norm * (max_val - min_val) + min_val
+
 def export_obj(vertices: np.ndarray, faces: np.ndarray, path: str) -> None:
     with open(path, 'w') as f:
         for v in vertices:

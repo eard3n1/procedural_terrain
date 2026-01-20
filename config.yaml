@@ -3,11 +3,11 @@ terrain:
   height: 128
 
 noise:
-  type: "perlin" # "perlin" or "fbm"
+  type: "fbm" # "perlin" or "fbm"
   scale: 20.0
   octaves: 4  # only used in fbm
   seed: 67
-  height_scale: 8.0 
+  height_scale: 8.0
 
 output:
   mesh_dir: "meshes/"
