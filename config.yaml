@@ -1,10 +1,13 @@
 terrain:
-  width: 128         # x points
-  height: 128        # y points
-  scale: 20.0        # noise scale
-  height_scale: 8.0 # vertical exaggeration
-  octaves: 4         # FBM octaves
+  width: 128
+  height: 128
+
+noise:
+  type: "perlin" # "perlin" or "fbm"
+  scale: 20.0
+  octaves: 4  # only used in fbm
   seed: 67
+  height_scale: 8.0 
 
 output:
   mesh_dir: "meshes/"

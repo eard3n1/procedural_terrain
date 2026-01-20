@@ -1,32 +1,47 @@
 import os
 import yaml
-from engine.noise import fbm
+from engine.noise import perlin, fbm
 from engine.heightmap import normalize
 from engine.mesh import heightmap_mesh, export_obj
 
 with open("config.yaml", "r") as f:
     config = yaml.safe_load(f)
 
-terrain_cfg = config["terrain"]
-output_cfg = config["output"]
+terrain = config["terrain"]
+noise_cfg = config["noise"]
+output = config["output"]
 
-os.makedirs(output_cfg["mesh_dir"], exist_ok=True)
+os.makedirs(output["mesh_dir"], exist_ok=True)
 
-hm = fbm(
-    terrain_cfg["width"],
-    terrain_cfg["height"],
-    scale=terrain_cfg["scale"],
-    octaves=terrain_cfg.get("octaves", 4),
-    seed=terrain_cfg.get("seed", None)
-)
+if noise_cfg["type"] == "perlin":
+    hm = perlin(
+        terrain["width"],
+        terrain["height"],
+        scale=noise_cfg["scale"],
+        seed=noise_cfg.get("seed")
+    )
+
+elif noise_cfg["type"] == "fbm":
+    hm = fbm(
+        terrain["width"],
+        terrain["height"],
+        scale=noise_cfg["scale"],
+        octaves=noise_cfg.get("octaves", 4),
+        seed=noise_cfg.get("seed")
+    )
+
+else:
+    raise ValueError(f"Unknown noise type: {noise_cfg["type"]}")
+
 hm = normalize(hm)
 
 vertices, faces = heightmap_mesh(
     hm,
-    scale=1.0,
-    height_scale=terrain_cfg.get("height_scale", 10)
+    height_scale=noise_cfg["height_scale"]
 )
 
-output_path = os.path.join(output_cfg["mesh_dir"], output_cfg["mesh_name"])
+output_path = os.path.join(output["mesh_dir"], output["mesh_name"])
 export_obj(vertices, faces, output_path)
-print(f"Terrain exported to: {output_path}")
+
+print(f"Terrain generated using: {noise_cfg["type"]} noise")
+print(f"Exported to: {output_path}")

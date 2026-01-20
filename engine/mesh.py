@@ -18,7 +18,7 @@ def heightmap_mesh(hm: np.ndarray, scale: float = 1.0, height_scale: float = 1.0
     faces = np.array(faces, dtype=np.int32)
     return vertices, faces
 
-def export_obj(vertices: np.ndarray, faces: np.ndarray, path: str):
+def export_obj(vertices: np.ndarray, faces: np.ndarray, path: str) -> None:
     with open(path, 'w') as f:
         for v in vertices:
             f.write(f"v {v[0]} {v[1]} {v[2]}\n")

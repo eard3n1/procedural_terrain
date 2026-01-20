@@ -1,7 +1,7 @@
 # procedural_terrain
 Minimal procedural terrain generation with 3D mesh export and visualization.
 
-<img src="notebook/output.png" width=256>
+<img src="noises/fbm.png" width=256> <img src="noises/perlin.png" width=256>
 
 ## Features
 - Procedurally generate heightmaps with fractal noise using FBM & Perlin
