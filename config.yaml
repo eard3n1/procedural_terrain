@@ -7,11 +7,11 @@ noise:
   scale: 20.0
   octaves: 4  # only used in fbm
   seed: 67
-  height_scale: 8.0
+  height_scale: 10.0
 
 output:
   mesh_dir: "meshes/"
   mesh_name: "terrain.obj"
 
 render:
-  cmap: "terrain" # colormap
+  cmap: "terrain" # colormap for matplotlib
