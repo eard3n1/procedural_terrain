@@ -1,5 +1,4 @@
 import numpy as np
-import random
 
 def heightmap_mesh(hm: np.ndarray, scale: float = 1.0, height_scale: float = 1.0) -> tuple[np.ndarray, np.ndarray]:
     h, w = hm.shape
@@ -22,8 +21,13 @@ def heightmap_mesh(hm: np.ndarray, scale: float = 1.0, height_scale: float = 1.0
 def heightmap_color(h, h_min, h_max) -> tuple[float, float, float]:
     t = (h - h_min) / (h_max - h_min + 1e-8)
 
-    if t <= 0.5: return (random.uniform(0.1, 0.2), random.uniform(0.5, 0.8), random.uniform(0.1, 0.2))
-    else:        return (random.uniform(0.5, 0.7), random.uniform(0.5, 0.7), random.uniform(0.5, 0.7))
+    if   t < 0.2: return (np.random.uniform(0.15, 0.2), np.random.uniform(0.35, 0.4), np.random.uniform(0.75, 0.8))
+    elif t < 0.3: return (np.random.uniform(0.25, 0.3), np.random.uniform(0.55, 0.6), np.random.uniform(0.35, 0.4))
+    elif t < 0.5: return (np.random.uniform(0.35, 0.4), np.random.uniform(0.65, 0.7), np.random.uniform(0.35, 0.4))
+    elif t < 0.6: return (np.random.uniform(0.35, 0.4), np.random.uniform(0.55, 0.6), np.random.uniform(0.45, 0.5))
+    elif t < 0.8: return (np.random.uniform(0.45, 0.5), np.random.uniform(0.45, 0.5), np.random.uniform(0.55, 0.6))
+    elif t < 0.9: return (np.random.uniform(0.85, 0.9), np.random.uniform(0.85, 0.9), np.random.uniform(0.85, 0.9))
+    else:         return (1, 1, 1)
 
 def normalize(hm: np.ndarray, min_val: float = 0.0, max_val: float = 1.0) -> np.ndarray:
     hm_min, hm_max = hm.min(), hm.max()

@@ -24,11 +24,7 @@ Sky()
 
 player = FirstPersonController(
     position=(0, 30, 0),
-    speed=10,
-    gravity=0.5,
-    jump_height=4,
-    jump_up_duration = 1,
-    fall_after=0.7
+    gravity=0.5
 )
 
 def update():
