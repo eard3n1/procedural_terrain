@@ -6,16 +6,21 @@ import os
 with open("config.yaml", "r") as f:
     config = yaml.safe_load(f)
 
-output_cfg = config["output"]
-mesh_path = os.path.join(output_cfg["mesh_dir"], output_cfg["mesh_name"])
+terrain = config["terrain"]
+output = config["output"]
+noise = config["noise"]
+mesh = os.path.join(output["mesh_dir"], output["mesh_name"])
 
-if not os.path.exists(mesh_path):
+width, height = int(terrain["width"]), int(terrain["height"])
+height_scale = int(noise["height_scale"])
+
+if not os.path.exists(mesh):
     raise FileNotFoundError("obj file not found, run generate.py first.")
 
 app = Ursina()
 
 terrain = Entity(
-    model=mesh_path,
+    model=mesh,
     collider="mesh",
     double_sided=True
 )
@@ -23,12 +28,15 @@ terrain = Entity(
 Sky()
 
 player = FirstPersonController(
-    position=(0, 30, 0),
-    gravity=0.5
+    position=(width / -2, height_scale * 2, height / 2),
+    gravity=0.5,
+    jump_height=4,
+    speed=10
 )
 
 def update():
     if player.y < -50:
-        player.position = (0, 30, 0)
+        (width / -2, height_scale * 2, height / 2)
 
+window.fullscreen = True
 app.run()
