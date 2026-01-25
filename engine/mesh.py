@@ -1,5 +1,12 @@
 import numpy as np
 
+def normalize(hm: np.ndarray, min_val: float = 0.0, max_val: float = 1.0) -> np.ndarray:
+    hm_min, hm_max = hm.min(), hm.max()
+
+    if hm_max - hm_min == 0: return np.full_like(hm, min_val)
+    norm = (hm - hm_min) / (hm_max - hm_min)
+    return norm * (max_val - min_val) + min_val
+
 def heightmap_mesh(hm: np.ndarray, scale: float = 1.0, height_scale: float = 1.0) -> tuple[np.ndarray, np.ndarray]:
     h, w = hm.shape
     vertices = np.zeros((h * w, 3), dtype=np.float32)
@@ -27,14 +34,7 @@ def heightmap_color(h, h_min, h_max) -> tuple[float, float, float]:
     elif t < 0.6: return (np.random.uniform(0.35, 0.4), np.random.uniform(0.55, 0.6), np.random.uniform(0.45, 0.5))
     elif t < 0.8: return (np.random.uniform(0.45, 0.5), np.random.uniform(0.45, 0.5), np.random.uniform(0.55, 0.6))
     elif t < 0.9: return (np.random.uniform(0.85, 0.9), np.random.uniform(0.85, 0.9), np.random.uniform(0.85, 0.9))
-    else:         return (1, 1, 1)
-
-def normalize(hm: np.ndarray, min_val: float = 0.0, max_val: float = 1.0) -> np.ndarray:
-    hm_min, hm_max = hm.min(), hm.max()
-
-    if hm_max - hm_min == 0: return np.full_like(hm, min_val)
-    norm = (hm - hm_min) / (hm_max - hm_min)
-    return norm * (max_val - min_val) + min_val
+    else:         return (1.0, 1.0, 1.0)
 
 def export_obj(vertices: np.ndarray, faces: np.ndarray, path: str) -> None:
     heights = vertices[:, 1]

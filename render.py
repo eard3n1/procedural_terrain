@@ -34,9 +34,5 @@ player = FirstPersonController(
     speed=10
 )
 
-def update():
-    if player.y < -50:
-        (width / -2, height_scale * 2, height / 2)
-
 window.fullscreen = True
 app.run()

@@ -1,6 +1,6 @@
 import os
 import yaml
-from engine.noise import perlin, fbm
+from engine.noise import perlin, simplex, fbm, billow, ridged
 from engine.mesh import normalize
 from engine.mesh import heightmap_mesh, export_obj
 
@@ -23,6 +23,34 @@ if noise["type"] == "perlin":
 
 elif noise["type"] == "fbm":
     hm = fbm(
+        terrain["width"],
+        terrain["height"],
+        scale=noise["scale"],
+        octaves=noise.get("octaves", 4),
+        persistence=noise.get("persistence", 0.5),
+        lacunarity=noise.get("lacunarity", 2.0),
+        seed=noise.get("seed")
+    )
+
+elif noise["type"] == "simplex":
+    hm = simplex(
+        terrain["width"],
+        terrain["height"],
+        scale=noise["scale"],
+        seed=noise.get("seed")
+    )
+
+elif noise["type"] == "billow":
+    hm = billow(
+        terrain["width"],
+        terrain["height"],
+        scale=noise["scale"],
+        octaves=noise.get("octaves", 4),
+        seed=noise.get("seed")
+    )
+
+elif noise["type"] == "ridged":
+    hm = ridged(
         terrain["width"],
         terrain["height"],
         scale=noise["scale"],

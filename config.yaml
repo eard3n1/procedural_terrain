@@ -3,9 +3,9 @@ terrain:
   height: 128
 
 noise:
-  type: "fbm" # "perlin" or "fbm"
+  type: "fbm" # perlin | fbm | simplex | billow | ridged
   scale: 22.0
-  octaves: 4  # only used in fbm
+  octaves: 4
   seed: 67
   height_scale: 12.0
 
