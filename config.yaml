@@ -4,10 +4,10 @@ terrain:
 
 noise:
   type: "fbm" # perlin | fbm | simplex | billow | ridged
-  scale: 22.0
+  scale: 25.0
   octaves: 4
   seed: 67
-  height_scale: 12.0
+  height_scale: 15.0
 
 output:
   mesh_dir: "meshes/"

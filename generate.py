@@ -58,13 +58,13 @@ elif noise["type"] == "ridged":
         seed=noise.get("seed")
     )
 
-else: raise ValueError(f"Unknown noise type: {noise["type"]}")
+else: raise ValueError(f"Unknown noise type: {noise['type']}")
 
 hm = normalize(hm)
 vertices, faces = heightmap_mesh(hm, height_scale=noise["height_scale"])
-
 output_path = os.path.join(output["mesh_dir"], output["mesh_name"])
-export_obj(vertices, faces, output_path)
 
-print(f"Terrain generated using: {noise["type"].upper()} noise")
-print(f"Exported to: {output_path}")
+if __name__ == "__main__":
+    export_obj(vertices, faces, output_path)
+    print(f"Terrain generated using: {noise['type'].upper()} noise")
+    print(f"Exported to: {output_path}")

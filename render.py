@@ -34,5 +34,6 @@ player = FirstPersonController(
     speed=10
 )
 
-window.fullscreen = True
-app.run()
+if __name__ == "__main__":
+    window.fullscreen = True
+    app.run()
