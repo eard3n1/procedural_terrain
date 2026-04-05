@@ -6,11 +6,12 @@ Minimal procedural terrain generation with 3D mesh export, render & visualizatio
 ## Features
 - Procedural heightmap generation using fractal noise
 - Convert heightmaps to 3D mesh (OBJ format)
-- Render the 3D mesh using **Ursina Engine**
-- Static visualization in **Jupyter Notebook**
-- Configurable via <code>config.yaml</code>
+- Render the mesh using **Ursina Engine**
+- Static visualization / analysis
+- Configurable via yaml
 
 ## Dependencies
+- Python 3.10+
 - Numpy
 - Matplotlib
 - Noise
@@ -18,22 +19,27 @@ Minimal procedural terrain generation with 3D mesh export, render & visualizatio
 - Ursina
 
 ## Usage
-1. Visualize in **Jupyter Notebook**:
-    - Open <code>visualization.ipynb</code>. The notebook generates an illustration of the terrain in a simple 3D graph:
-    
-    <img src="noises/billow.png" width=256> <img src="noises/ridged.png" width=256>
-
+1. Install requirements:
+    - ```bash
+        pip install -r requirements.txt
+        ```
+    - Noise might require wheel setup.
 2. Generate & export mesh:
     - ```bash
         python generate.py
         ```
-    - This will produce an OBJ file in <code>meshes/</code> that can eventually be rendered in **Blender** or **Meshlab**
+    - This will produce an OBJ file in <code>meshes/</code> that can eventually be rendered in **Blender** or **Meshlab**.
 
 3. Render using generated mesh:
     - ```bash
         python render.py
         ```
-    - This will render the mesh in a 3D environment that is possible to view in first person.
+    - This will render the mesh in a first person 3D environment to have a simple look.
+
+4. Visualization in notebook:
+    - Open <code>analysis.ipynb</code>. The notebook generates an illustration of the terrain in a simple 3D graph:
+    
+    <img src="noises/billow.png" width=256> <img src="noises/ridged.png" width=256>
 
 ## License
 MIT License

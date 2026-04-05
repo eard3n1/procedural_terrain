@@ -4,14 +4,14 @@ terrain:
 
 noise:
   type: "fbm" # perlin | fbm | simplex | billow | ridged
+  seed: 42    # set to 0 for random
   scale: 25.0
-  octaves: 4
-  seed: 67
   height_scale: 15.0
+
+  octaves: 4  # not used for perlin and simplex
+  persistance: 0.5
+  lacunarity: 2.0
 
 output:
   mesh_dir: "meshes/"
   mesh_name: "terrain.obj"
-
-render:
-  cmap: "terrain" # colormap for matplotlib

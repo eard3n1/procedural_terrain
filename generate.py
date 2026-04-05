@@ -1,70 +1,22 @@
 import os
 import yaml
-from engine.noise import perlin, simplex, fbm, billow, ridged
-from engine.mesh import normalize
-from engine.mesh import heightmap_mesh, export_obj
+from engine.noise import select
+from engine.mesh import normalize, heightmap_mesh, export_obj
 
-with open("config.yaml", "r") as f:
-    config = yaml.safe_load(f)
+with open("config.yaml", 'r') as y:
+    config = yaml.safe_load(y)
 
-terrain = config["terrain"]
 noise = config["noise"]
 output = config["output"]
 
-os.makedirs(output["mesh_dir"], exist_ok=True)
-
-if noise["type"] == "perlin":
-    hm = perlin(
-        terrain["width"],
-        terrain["height"],
-        scale=noise["scale"],
-        seed=noise.get("seed")
-    )
-
-elif noise["type"] == "fbm":
-    hm = fbm(
-        terrain["width"],
-        terrain["height"],
-        scale=noise["scale"],
-        octaves=noise.get("octaves", 4),
-        persistence=noise.get("persistence", 0.5),
-        lacunarity=noise.get("lacunarity", 2.0),
-        seed=noise.get("seed")
-    )
-
-elif noise["type"] == "simplex":
-    hm = simplex(
-        terrain["width"],
-        terrain["height"],
-        scale=noise["scale"],
-        seed=noise.get("seed")
-    )
-
-elif noise["type"] == "billow":
-    hm = billow(
-        terrain["width"],
-        terrain["height"],
-        scale=noise["scale"],
-        octaves=noise.get("octaves", 4),
-        seed=noise.get("seed")
-    )
-
-elif noise["type"] == "ridged":
-    hm = ridged(
-        terrain["width"],
-        terrain["height"],
-        scale=noise["scale"],
-        octaves=noise.get("octaves", 4),
-        seed=noise.get("seed")
-    )
-
-else: raise ValueError(f"Unknown noise type: {noise['type']}")
-
+hm = select(noise["type"], config)
 hm = normalize(hm)
-vertices, faces = heightmap_mesh(hm, height_scale=noise["height_scale"])
+
+vertices, faces = heightmap_mesh(hm, noise["height_scale"])
 output_path = os.path.join(output["mesh_dir"], output["mesh_name"])
 
 if __name__ == "__main__":
+    os.makedirs(output["mesh_dir"], exist_ok=True)
     export_obj(vertices, faces, output_path)
-    print(f"Terrain generated using: {noise['type'].upper()} noise")
+    print(f"Terrain generated using: {noise['type'].upper()} noise | seed: {noise['seed'] if noise['seed'] else 'RANDOM'}")
     print(f"Exported to: {output_path}")

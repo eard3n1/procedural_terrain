@@ -1,20 +1,20 @@
 import numpy as np
 
-def normalize(hm: np.ndarray, min_val: float = 0.0, max_val: float = 1.0) -> np.ndarray:
+def normalize(hm: np.ndarray) -> np.ndarray:
     hm_min, hm_max = hm.min(), hm.max()
 
-    if hm_max - hm_min == 0: return np.full_like(hm, min_val)
+    if hm_max - hm_min == 0: return np.full_like(hm, 0)
     norm = (hm - hm_min) / (hm_max - hm_min)
-    return norm * (max_val - min_val) + min_val
+    return norm
 
-def heightmap_mesh(hm: np.ndarray, scale: float = 1.0, height_scale: float = 1.0) -> tuple[np.ndarray, np.ndarray]:
+def heightmap_mesh(hm: np.ndarray, height_scale: float) -> tuple[np.ndarray, np.ndarray]:
     h, w = hm.shape
     vertices = np.zeros((h * w, 3), dtype=np.float32)
 
     for y in range(h):
         for x in range(w):
             idx = y * w + x
-            vertices[idx] = [x * scale, hm[y, x] * height_scale, y * scale]
+            vertices[idx] = [x, hm[y, x] * height_scale, y]
 
     faces = []
     for y in range(h - 1):
