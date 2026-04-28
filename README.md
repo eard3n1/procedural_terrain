@@ -21,21 +21,21 @@ A minimal procedural terrain generation pipeline. Composites fractal noise into 
 ## Usage
 1. Install requirements:
     - ```bash
-        pip install -r requirements.txt
+      pip install -r requirements.txt
       ```
 
     - The `noise` package may require a wheel build on some platforms.
 
 2. Generate & export mesh:
    - ```bash
-        python generate.py
+     python generate.py
      ```
     
     - Outputs an OBJ file to `meshes/`, ready to import into Blender or MeshLab.
 
 3. Preview in first-person:
     - ```bash
-        python render.py
+      python render.py
       ```
 
     - Loads the generated mesh in a minimal Ursina environment for first-person visualization.
