@@ -1,14 +1,14 @@
-# procedural_terrain
-Minimal procedural terrain generation with 3D mesh export, render & visualization.
+# strata_forge
+
+A minimal procedural terrain generation pipeline. Composites fractal noise into heightmaps, converts them into 3D meshes, and drops you into a walkable first-person <a href="https://www.ursinaengine.org/">Ursina</a> environment.
 
 <img src="noises/fbm.png" width=256> <img src="noises/perlin.png" width=256>
 
 ## Features
-- Procedural heightmap generation using fractal noise
-- Convert heightmaps to 3D mesh (OBJ format)
-- Render the mesh using **Ursina Engine**
-- Static visualization / analysis
-- Configurable via yaml
+- Noise presets: Perlin, Simplex, FBm, Billow, Ridged
+- Heightmap to mesh conversion with OBJ export
+- First-person mesh preview using Ursina Engine
+- Jupyter notebook terrain analysis and visualization
 
 ## Dependencies
 - Python 3.10+
@@ -22,23 +22,28 @@ Minimal procedural terrain generation with 3D mesh export, render & visualizatio
 1. Install requirements:
     - ```bash
         pip install -r requirements.txt
-        ```
-    - Noise might require wheel setup.
-2. Generate & export mesh:
-    - ```bash
-        python generate.py
-        ```
-    - This will produce an OBJ file in <code>meshes/</code> that can eventually be rendered in **Blender** or **Meshlab**.
+      ```
 
-3. Render using generated mesh:
+    - The `noise` package may require a wheel build on some platforms.
+
+2. Generate & export mesh:
+   - ```bash
+        python generate.py
+     ```
+    
+    - Outputs an OBJ file to `meshes/`, ready to import into Blender or MeshLab.
+
+3. Preview in first-person:
     - ```bash
         python render.py
-        ```
-    - This will render the mesh in a first person 3D environment to have a simple look.
+      ```
+
+    - Loads the generated mesh in a minimal Ursina environment for first-person visualization.
 
 4. Visualization in notebook:
-    - Open <code>analysis.ipynb</code>. The notebook generates an illustration of the terrain in a simple 3D graph:
-    
+
+    Open `analysis.ipynb` for heightmap inspection and 3D terrain visualization.
+
     <img src="noises/billow.png" width=256> <img src="noises/ridged.png" width=256>
 
 ## License
