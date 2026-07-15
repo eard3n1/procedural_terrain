@@ -10,7 +10,7 @@ A minimal procedural terrain generation pipeline. Composites fractal noise into 
 - First-person mesh preview using Ursina Engine
 - Jupyter notebook terrain analysis and visualization
 
-## Dependencies
+## Requirements
 - Python 3.10+
 - Numpy
 - Matplotlib

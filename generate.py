@@ -1,10 +1,11 @@
 import os
-import yaml
+
 from engine.noise import select
 from engine.mesh import normalize, heightmap_mesh, export_obj
+from engine.config import load_config
 
-with open("config.yaml", 'r') as y:
-    config = yaml.safe_load(y)
+
+config = load_config("config.yaml")
 
 noise = config["noise"]
 output = config["output"]

@@ -1,10 +1,11 @@
 import os
-import yaml
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 
-with open("config.yaml", 'r') as y:
-    config = yaml.safe_load(y)
+from engine.config import load_config
+
+
+config = load_config("config.yaml")
 
 terrain = config["terrain"]
 output = config["output"]

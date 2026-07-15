@@ -1,5 +1,6 @@
 import numpy as np
 
+
 def normalize(hm: np.ndarray) -> np.ndarray:
     hm_min, hm_max = hm.min(), hm.max()
 
@@ -40,10 +41,10 @@ def export_obj(vertices: np.ndarray, faces: np.ndarray, path: str) -> None:
     heights = vertices[:, 1]
     h_min, h_max = heights.min(), heights.max()
 
-    with open(path, 'w') as f:
+    with open(path, "w") as obj:
         for v in vertices:
             r, g, b = heightmap_color(v[1], h_min, h_max)
-            f.write(f"v {v[0]} {v[1]} {v[2]} {r} {g} {b}\n")
+            obj.write(f"v {v[0]} {v[1]} {v[2]} {r} {g} {b}\n")
 
         for face in faces:
-            f.write(f"f {face[0] + 1} {face[1] + 1} {face[2] + 1}\n")
+            obj.write(f"f {face[0] + 1} {face[1] + 1} {face[2] + 1}\n")

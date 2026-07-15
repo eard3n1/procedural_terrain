@@ -1,6 +1,7 @@
 import numpy as np
 from noise import pnoise2, snoise2
 
+
 def _base(seed: int) -> int:
     if seed == 0:
         seed = np.random.randint(0, 100)
