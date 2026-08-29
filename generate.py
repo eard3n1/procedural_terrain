@@ -1,4 +1,4 @@
-import os
+from pathlib import Path
 
 from engine.noise import select
 from engine.mesh import normalize, heightmap_mesh, export_obj
@@ -14,10 +14,11 @@ hm = select(noise["type"], config)
 hm = normalize(hm)
 
 vertices, faces = heightmap_mesh(hm, noise["height_scale"])
-output_path = os.path.join(output["mesh_dir"], output["mesh_name"])
+output_path = Path(output["mesh_dir"]) / output["mesh_name"]
 
 if __name__ == "__main__":
-    os.makedirs(output["mesh_dir"], exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     export_obj(vertices, faces, output_path)
-    print(f"Terrain generated using: {noise['type'].upper()} noise | seed: {noise['seed'] if noise['seed'] else 'RANDOM'}")
+
+    print(f"Terrain generated | noise: {noise['type'].capitalize()} | seed: {noise['seed'] if noise['seed'] else 'RANDOM'}")
     print(f"Exported to: {output_path}")

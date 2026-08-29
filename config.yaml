@@ -3,7 +3,7 @@ terrain:
   height: 128
 
 noise:
-  type: "fbm" # perlin | fbm | simplex | billow | ridged
+  type: "fbm" # fbm | perlin | simplex | billow | ridged
   seed: 42    # set to 0 for random
   scale: 25.0
   height_scale: 15.0
